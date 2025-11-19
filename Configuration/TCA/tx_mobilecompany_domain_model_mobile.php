@@ -106,7 +106,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'default' => ''
             ],
         ],
@@ -133,7 +134,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'default' => ''
             ],
         ],
@@ -149,7 +151,8 @@ return [
                     'lower' => 10000,
                     'upper' => 100000,
                 ],
-                'eval' => 'double2,required',
+                'eval' => 'number',
+                'required' => true,
             ]
         ],
         'image'=> [
@@ -175,13 +178,12 @@ return [
             'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_mobile.release_date',
             'description' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_mobile.release_date.description',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'format' => 'date',
                 'mode' => 'date',
                 'eval' => 'date',
-                'default' => '0000-00-00',
-                'dbType' => 'date',
+                'default' => 0,
+                'dbType' => 'datetime',
             ],
         ],
         'specifications' => [
@@ -206,7 +208,7 @@ return [
                 'foreign_table' => 'tx_mobilecompany_domain_model_company',
                 'minitems' => 0,
                 'maxitems' => 1,
-                'eval' => 'required',
+                'required' => true,
             ],
         ],
     

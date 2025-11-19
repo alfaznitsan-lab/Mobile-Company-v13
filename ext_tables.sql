@@ -5,7 +5,7 @@ CREATE TABLE tx_mobilecompany_domain_model_mobile (
 	brand          varchar(255)  NOT NULL DEFAULT '',
 	price          DECIMAL(11,2) NOT NULL DEFAULT '0.00',
 	image          int(11) unsigned NOT NULL DEFAULT '0',
-	release_date   date DEFAULT NULL,
+	release_date   datetime DEFAULT NULL,
 	specifications varchar(255) NOT NULL DEFAULT '',
 	companies      int(11) NOT NULL DEFAULT '0'
 );

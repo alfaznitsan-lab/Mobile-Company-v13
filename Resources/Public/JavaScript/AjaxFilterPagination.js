@@ -50,11 +50,9 @@ function fetchFilteredResults(event, pageNumber) {
         const doc = parser.parseFromString(html, 'text/html');
 
         const newContainer = doc.getElementById('mobile-list-container');
-        const errorContainer = doc.getElementById('filtererror');
 
         if (newContainer) {
             const contentTrimmed = newContainer.innerHTML.trim();
-            const newContainer = doc.getElementById('mobile-list-container');
             
             if (contentTrimmed === '' || contentTrimmed.includes('No items found')) {
                 resultsContainer.innerHTML = '';

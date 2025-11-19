@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nitsan\MobileCompany\Controller;
 
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
 /**
  * This file is part of the "Mobile Company" Extension for TYPO3 CMS.
@@ -61,9 +62,9 @@ class CompanyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function createAction(\Nitsan\MobileCompany\Domain\Model\Company $newCompany)
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage('The object was created.', '', ContextualFeedbackSeverity::OK);
         $this->companyRepository->add($newCompany);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
@@ -86,9 +87,10 @@ class CompanyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function updateAction(\Nitsan\MobileCompany\Domain\Model\Company $company)
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage('The object was updated.', '', ContextualFeedbackSeverity::INFO);
         $this->companyRepository->update($company);
-        $this->redirect('list');
+        return $this->redirect('list');
+        
     }
 
     /**
@@ -98,9 +100,9 @@ class CompanyController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function deleteAction(\Nitsan\MobileCompany\Domain\Model\Company $company)
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage('The object was deleted.', '', ContextualFeedbackSeverity::ERROR);
         $this->companyRepository->remove($company);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**

@@ -4,59 +4,54 @@ defined('TYPO3') || die();
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['mobilecompany_mobilecompanylistplugin'] = 'layout,select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['mobilecompany_mobilecompanylistplugin'] = 'pi_flexform';
+$extensionKey = 'mobile_company';
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['mobilecompany_mobilecompanydetailplugin'] = 'layout,select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['mobilecompany_mobilecompanydetailplugin'] = 'pi_flexform';
-   
 // --- Main Plugin ---
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'MobileCompany',
+$pluginSignatureMain = ExtensionUtility::registerPlugin(
+    $extensionKey,
     'Mobilecompanyplugin',
-    'Mobile Company Plugin'
+    'Mobile Company Plugin',
+    'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf: tx_mobile_company_mobilecompanylistplugin.name'
 );
 
 // --- Mobile List Plugin ---
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'MobileCompany',
+$pluginSignatureList = ExtensionUtility::registerPlugin(
+    $extensionKey,
     'Mobilecompanylistplugin',
-    'Mobile List Plugin'
+    'Mobile List Plugin',
+    'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf: tx_mobile_company_mobilecompanylistplugin.name'
 );
 
-TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'mobilecompany_mobilecompanylistplugin',
-    'FILE:EXT:mobile_company/Configuration/FlexForms/MobileList.xml'
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;Configuration,pi_flexform,pages,recursive',
+    $pluginSignatureList,
+    'after:subheader'
 );
 
-TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-    [
-        'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tt_content.list_type',
-        'mobilecompany_mobilecompanylistplugin'
-    ],
-    'list_type',
-    'mobile_company'
- );
-
-
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:mobile_company/Configuration/FlexForms/MobileList.xml',
+    $pluginSignatureList
+);
 
 // --- Mobile Detail Plugin ---
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'MobileCompany',
-    'Mobilecompanydetailplugin', 
-    'Mobile Detail Plugin'
+$pluginSignatureDetail = ExtensionUtility::registerPlugin(
+    $extensionKey,
+    'Mobilecompanydetailplugin',
+    'Mobile Detail Plugin',
+    'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf: tx_mobile_company_mobilecompanydetailplugin.name'
 );
 
-TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'mobilecompany_mobilecompanydetailplugin',
-    'FILE:EXT:mobile_company/Configuration/FlexForms/MobileDetail.xml'
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;Configuration,pi_flexform',
+    $pluginSignatureDetail,
+    'after:subheader'
 );
 
-TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-    [
-        'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tt_content.list_type',
-        'mobilecompany_mobilecompanydetailplugin'
-    ],
-    'list_type',
-    'mobile_company'
- );
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:mobile_company/Configuration/FlexForms/MobileDetail.xml',
+    $pluginSignatureDetail
+);
