@@ -144,14 +144,14 @@ return [
             'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_mobile.price',
             'description' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_mobile.price.description',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
+                'format' => 'decimal',
                 'placeholder' => 'prize range 10000 - 100000',
                 'size' => 30,
                 'range' => [
                     'lower' => 10000,
                     'upper' => 100000,
                 ],
-                'eval' => 'number',
                 'required' => true,
             ]
         ],
@@ -162,15 +162,14 @@ return [
             'config' => [
                 'type' => 'file',
                 'appearance' => [
+                    'collapseAll' => true,
                     'showPossibleLocalizationRecords' => true, 
                     'showRemovedLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
                     'showSynchronizationLink' => true,
                 ],
                 'maxitems' => 1,
-                'allowed' => 'common-image-types', // Recommended way to specify image types
-                // Alternatively, use the global variable if preferred, though 'common-image-types' is cleaner:
-                // 'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+                'allowed' => 'common-image-types',
             ],
         ],
         'release_date' => [
@@ -180,7 +179,6 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'format' => 'date',
-                'mode' => 'date',
                 'eval' => 'date',
                 'default' => 0,
                 'dbType' => 'datetime',
@@ -193,7 +191,6 @@ return [
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'minimal',
                 'eval' => 'trim',
                 'default' => ''
             ],
@@ -206,8 +203,6 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_mobilecompany_domain_model_company',
-                'minitems' => 0,
-                'maxitems' => 1,
                 'required' => true,
             ],
         ],

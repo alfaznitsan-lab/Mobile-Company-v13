@@ -123,7 +123,8 @@ return [
             'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.founded_year',
             'description' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.founded_year.description',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
+                'format' => 'integer',
                 'size' => 4,
                 'eval' => 'number',
                 'default' => 0
@@ -134,10 +135,10 @@ return [
             'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.website',
             'description' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.website.description',
             'config' => [
-                'type' => 'input',
+                'type' => 'link',
+                'allowedtypes' => ['url'],
                 'size' => 30,
-                'eval' => 'trim',
-                'default' => ''
+                'placeholder' => 'Enter a link',
             ],
         ],
         'description' => [
@@ -146,8 +147,7 @@ return [
             'description' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.description.description',
             'config' => [
                 'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
+                'enableRichtext' => true,
                 'eval' => 'trim',
                 'default' => ''
             ]
