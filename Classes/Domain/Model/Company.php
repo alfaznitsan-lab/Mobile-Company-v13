@@ -37,6 +37,13 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $country = null;
 
     /**
+     * Company email
+     *
+     * @var string
+     */
+    protected $email = null;
+
+    /**
      * Year established
      *
      * @var int
@@ -128,6 +135,27 @@ class Company extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCountry(string $country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * Returns the email
+     *
+     * @return string
+     */
+    public function getemail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets the email
+     *
+     * @param string $email
+     * @return void
+     */
+    public function setemail(string $email)
+    {
+        $this->email = $email;
     }
 
     /**

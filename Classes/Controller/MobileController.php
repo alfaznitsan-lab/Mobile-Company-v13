@@ -18,7 +18,10 @@ use \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use \Nitsan\MobileCompany\Domain\Repository\MobileRepository;
 use \Nitsan\MobileCompany\Domain\Repository\CompanyRepository;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Core\Utility\DebugUtility;
+use Symfony\Component\Mime\Address;
+use TYPO3\CMS\Core\Mail\MailMessage;
+use \TYPO3\CMS\Core\Utility\DebugUtility;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 
 /**
  * MobileController
@@ -61,12 +64,14 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected $objectManager;
 
-    //protected EventDispatcherInterface $eventDispatcher;
     protected EventDispatcherInterface $eventDispatcher;
+
+    private MailerInterface $mailer;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         MobileRepository $mobileRepository,
+        MailerInterface $mailer,
         CompanyRepository $companyRepository,
         PersistenceManagerInterface $persistenceManager
     ) 
@@ -75,6 +80,7 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->mobileRepository = $mobileRepository;
         $this->companyRepository = $companyRepository;
         $this->persistenceManager = $persistenceManager;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -207,6 +213,33 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                     $newMobile->getUid()
                 );
             }
+        }
+
+        $companyData = $newMobile->getcompanies();
+        //DebugUtility::debug($companyData, 'output of companyid');
+
+        if ($companyData) {
+            $companyName = $companyData->getname();
+            $companyEmail = $companyData->getemail();
+            $modelName = $newMobile->getmodelName();
+
+            //DebugUtility::debug($companyEmail, 'output of companyname');
+
+            //Sending Mail logic
+            $mail = GeneralUtility::makeInstance(MailMessage::class);
+            $mail->from(new Address('nit@example.com', 'Admin'));
+            $mail->to(
+                new Address($companyEmail, $companyName)
+            );
+            $mail->subject('Model Registration');
+            $mail->text('Your New mobile'.$modelName.' registered succeffully. Please check on site!');
+            $mail->html('<p>Your <b>New mobile '.$modelName.' registered succeffully</b>. Please <u>check on site</u>!</p>');
+            $this->mailer->send($mail);
+            $this->addFlashMessage(
+                'Registration successful. Confirmation email sent to ' . $companyEmail, '', ContextualFeedbackSeverity::OK
+            );
+        }else {
+            $this->addFlashMessage('Company not found for email!', '', ContextualFeedbackSeverity::WARNING);
         }
 
         $event = $this->eventDispatcher->dispatch(new LogEntryOnNewRecord('New model added in mobile list.'));

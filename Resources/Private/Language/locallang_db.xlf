@@ -75,6 +75,12 @@
 			<trans-unit id="tx_mobilecompany_domain_model_company.founded_year.description" resname="tx_mobilecompany_domain_model_company.founded_year.description">
 				<source>Year Established</source>
 			</trans-unit>
+			<trans-unit id="tx_mobilecompany_domain_model_company.email" resname="tx_mobilecompany_domain_model_company.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_mobilecompany_domain_model_company.email.description" resname="tx_mobilecompany_domain_model_company.email.description">
+				<source>Company Email</source>
+			</trans-unit>
 			<trans-unit id="tx_mobilecompany_domain_model_company.website" resname="tx_mobilecompany_domain_model_company.website">
 				<source>Website</source>
 			</trans-unit>

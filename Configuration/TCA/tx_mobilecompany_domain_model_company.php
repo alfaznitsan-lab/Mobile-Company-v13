@@ -20,7 +20,7 @@ return [
         'iconfile' => 'EXT:mobile_company/Resources/Public/Icons/tx_mobilecompany_domain_model_company.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'name, country, founded_year, website, description, mobiles, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => ['showitem' => 'name, country, email, founded_year, website, description, mobiles, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -116,6 +116,18 @@ return [
                 'eval' => 'trim',
                 'required' => true,
                 'default' => ''
+            ],
+        ],
+        'email' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.email',
+            'description' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_company.email.description',
+            'config' => [
+                'type' => 'email',
+                'size' =>30,
+                'required' => true,
+                'placeholder' => 'Enter a Email',
+                'eval' => 'uniqueInPid',
             ],
         ],
         'founded_year' => [
