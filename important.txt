@@ -1,0 +1,148 @@
+Extension Setup:
+
+    Create a new extension using the Extension Builder or manually.
+    Define your domain model(s) (e.g., MyObject) representing the data you want to display. These models should extend \TYPO3\CMS\Extbase\DomainObject\AbstractEntity.
+    Create corresponding repositories (e.g., MyObjectRepository) for your models, extending \TYPO3\CMS\Extbase\Persistence\Repository.
+
+Backend Module Registration:
+
+    ext_tables.php: Register your backend module in this file.
+
+        <?php
+    defined('TYPO3') || die('Access denied.');
+
+    if (TYPO3_MODE === 'BE') {
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+            'Vendor.MyExtension', // Extension key
+            'web', // Main module (e.g., 'web', 'site', 'tools')
+            'mybackendmodule', // Submodule key
+            '', // Position in the main module menu
+            [
+                \Vendor\MyExtension\Controller\MyBackendController::class => 'list,show', // Controller and actions
+            ],
+            [
+                'access' => 'user,group',
+                'icon'   => 'EXT:my_extension/Resources/Public/Icons/module-icon.svg',
+                'labels' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang_mod.xlf',
+            ]
+        );
+    }
+
+
+Configuration/Backend/Modules.php (for TYPO3 v13 and above): Alternatively, for a modern approach, you can define your module in Configuration/Backend/Modules.php.
+
+    <?php
+    return [
+        'web_mybackendmodule' => [
+            'parent' => 'web',
+            'position' => ['after' => 'web_layout'],
+            'access' => 'user,group',
+            'iconIdentifier' => 'myextension-module-icon', // Define an icon identifier
+            'labels' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang_mod.xlf',
+            'extension' => 'my_extension',
+            'controllerActions' => [
+                \Vendor\MyExtension\Controller\MyBackendController::class => [
+                    'list',
+                    'show',
+                ],
+            ],
+        ],
+    ];
+
+Configuration/Icons.php: If using iconIdentifier, define it here.
+
+    <?php
+    return [
+        'myextension-module-icon' => [
+            'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+            'source' => 'EXT:my_extension/Resources/Public/Icons/module-icon.svg',
+        ],
+    ];
+
+Controller Implementation:
+
+    Create your backend controller (e.g., MyBackendController) in Classes/Controller/.
+    Tag your controller with #[AsController] attribute for automatic registration.
+    Implement listAction() to retrieve and display a list of your data using the repository.
+    Implement showAction() to retrieve and display the details of a single data record.
+    Inject ModuleTemplateFactory to access backend template features like DocHeader.
+
+    <?php
+namespace Vendor\MyExtension\Controller;
+
+use TYPO3\CMS\Backend\Attribute\AsController;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Vendor\MyExtension\Domain\Repository\MyObjectRepository;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+
+#[AsController]
+class MyBackendController extends ActionController
+{
+    protected MyObjectRepository $myObjectRepository;
+    protected ModuleTemplateFactory $moduleTemplateFactory;
+
+    public function injectMyObjectRepository(MyObjectRepository $myObjectRepository): void
+    {
+        $this->myObjectRepository = $myObjectRepository;
+    }
+
+    public function injectModuleTemplateFactory(ModuleTemplateFactory $moduleTemplateFactory): void
+    {
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
+    }
+
+    public function listAction(): \TYPO3\CMS\Extbase\Mvc\View\ViewInterface
+    {
+        $myObjects = $this->myObjectRepository->findAll();
+        $this->view->assign('myObjects', $myObjects);
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        // Add DocHeader buttons or other elements if needed
+        return $this->view;
+    }
+
+    public function showAction(\Vendor\MyExtension\Domain\Model\MyObject $myObject): \TYPO3\CMS\Extbase\Mvc\View\ViewInterface
+    {
+        $this->view->assign('myObject', $myObject);
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        return $this->view;
+    }
+}
+
+Fluid Templates:
+
+    Create Fluid templates for listAction and showAction in Resources/Private/Templates/MyBackend/.
+    List.html: Iterate over the $myObjects variable to display a list, including links to the showAction for each item.
+    Show.html: Display the details of the $myObject variable.
+
+    <!-- Resources/Private/Templates/MyBackend/List.html -->
+<f:layout name="Backend" />
+<f:section name="Content">
+    <h1>My Objects List</h1>
+    <ul>
+        <f:for each="{myObjects}" as="myObject">
+            <li><f:link.action action="show" arguments="{myObject: myObject}">{myObject.title}</f:link.action></li>
+        </f:for>
+    </ul>
+</f:section>
+
+<!-- Resources/Private/Templates/MyBackend/Show.html -->
+<f:layout name="Backend" />
+<f:section name="Content">
+    <h1>{myObject.title}</h1>
+    <p>Details: {myObject.description}</p>
+    <f:link.action action="list">Back to list</f:link.action>
+</f:section>
+
+Language Files:
+
+    Create locallang_mod.xlf in Resources/Private/Language/ for module labels. 
+
+6. Database Table (TCA):
+
+    Define the database table and its fields in Configuration/TCA/tx_myextension_domain_model_myobject.php to allow TYPO3 to manage your data. 
+
+7. Clear Caches:
+
+    After making changes, clear the TYPO3 caches (especially the system caches) in the Install Tool or the backend "Flush Frontend Caches" and "Flush All Caches" options. 
+
+This outline provides a comprehensive guide to creating an Extbase-based backend module in TYPO3 v13 for listing and displaying data details. Remember to adapt the names and paths to your specific extension and domain models.

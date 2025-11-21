@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="content">
+    <h1>List Of Mobile</h1><br>
+    <f:flashMessages />
+    <table class="tx_mobilecompany table table-bordered table-hover">
+        <tr class="table-dark">
+            <th>id</th>
+            <th><f:translate key="tx_mobilecompany_domain_model_mobile.image" /></th>
+            <th><f:translate key="tx_mobilecompany_domain_model_mobile.model_name" /></th>
+            <th><f:translate key="tx_mobilecompany_domain_model_mobile.brand" /></th>
+            <th><f:translate key="tx_mobilecompany_domain_model_mobile.price" /></th>
+            <th>Details</th>
+        </tr>
+
+        <f:for each="{mobiles}" as="mobile">
+            <tr>
+            <td>
+                {mobile.uid}
+            <td>
+                <f:if condition="{mobile.image}">
+                <f:then>
+                    <f:image image="{mobile.image.0}" class="img-fluid rounded-start m-1" alt="Mobile Image" width="100px" height="100px"/>
+                </f:then>
+                <f:else>
+                    No Image
+                </f:else>
+                </f:if>
+            </td>
+            <td>{mobile.modelName}</td>
+            <td>{mobile.brand}</td>
+            <td>{mobile.price}</td>
+            <td><f:link.action action="show" arguments="{mobile : mobile}" extensionName="MobileCompany" class="btn btn-outline-info" >Show</f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+</f:section>
+</html>

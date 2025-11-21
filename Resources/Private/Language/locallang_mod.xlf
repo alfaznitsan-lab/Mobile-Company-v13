@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:mobile_company/Resources/Private/Language/locallang_mod.xlf" date="2025-10-13T13:26:03Z" product-name="mobile_company">
+		<header/>
+		<body>
+			<trans-unit id="tx_mobilecompany_domain_module" resname="tx_mobilecompany_domain_module">
+				<source>Mobile Data Overview</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
