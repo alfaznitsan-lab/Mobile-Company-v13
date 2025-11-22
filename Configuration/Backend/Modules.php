@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 return [
-    'mobile_company_be_module' => [
+    'mobile_company_module' => [
         'parent' => 'web', 
         'position' => ['after' => 'web_layout'],
         'access' => 'admin',
@@ -14,6 +14,15 @@ return [
                 'list', 'show'
             ],
         ],
+        'moduleData' => [
+            'cssFiles' => [
+                'EXT:mobile_company/Resources/Public/Css/bootstrap.min.css',
+                'EXT:mobile_company/Resources/Public/Css/custom.css'
+            ],
+            'javascriptFiles' => [
+                'EXT:mobile_company/Resources/Public/JavaScript/bootstrap.bundle.min.js'
+            ]
+        ]
     ],
 ];
 

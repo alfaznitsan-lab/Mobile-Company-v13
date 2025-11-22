@@ -12,3 +12,77 @@
     border: 3px solid black;
     padding: 10px;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f9fc;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.tx_mobilecompany {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tx_mobilecompany th {
+    background: #343a40;
+    color: #ffffff;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.tx_mobilecompany td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.tx_mobilecompany tr:hover {
+    background: #f1f3f5;
+}
+
+.tx_mobilecompany tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.tx_mobilecompany img {
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+.btn-outline-info {
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-outline-info:hover {
+    background-color: #0dcaf0;
+    color: white;
+}
+
+.flasMessages {
+    margin-bottom: 15px;
+}
+
+.table-bordered {
+    border-width: 2px !important;
+    border-color: #0d6efd !important;
+}

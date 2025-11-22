@@ -26,5 +26,3 @@ services:
       - name: event.listener
         identifier: 'NewRecordAdd'
         event: 'Nitsan\MobileCompany\Event\LogEntryOnNewRecord'
-
-  

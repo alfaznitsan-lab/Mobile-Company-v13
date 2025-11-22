@@ -24,6 +24,12 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
  */
 class MobileRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    public function initializeObject(): void
+    {
+        $querySettings = $this->createQuery()->getQuerySettings();
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
     private const TABLE = 'tx_mobilecompany_domain_model_mobile';
     protected $defaultOrderings = ['crdate' => QueryInterface::ORDER_ASCENDING];
 

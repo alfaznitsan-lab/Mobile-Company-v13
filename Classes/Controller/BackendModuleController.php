@@ -9,31 +9,30 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Nitsan\MobileCompany\Domain\Repository\MobileRepository;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 #[AsController]
 final class BackendModuleController extends ActionController
 {
     public function __construct(
         private readonly ModuleTemplateFactory $moduleTemplateFactory,
-        protected MobileRepository $mobileRepository
+        protected MobileRepository $mobileRepository,
     ) {}
+
+    protected function initializeView(\TYPO3\CMS\Core\View\ViewInterface $view): void
+    {
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->view->assign('moduleTemplate', $moduleTemplate);
+    }
 
     /**
      * action list
      */
     public function listAction(): ResponseInterface
     {
-        $query = $this->mobileRepository->findAll()->getQuery();
-        $storagePids = [2];
-        $query->getQuerySettings()->setStoragePageIds($storagePids);
-        $mobiles = $query->execute();
-
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-
-        $moduleTemplate->assign('mobiles', $mobiles);
-
-        return new HtmlResponse($moduleTemplate->render('BackendModule/List'));
+        $mobiles = $this->mobileRepository->findAll();
+        $this->view->assign('mobiles', $mobiles);
+        return $this->htmlResponse();
     }
 
     /**
@@ -41,8 +40,7 @@ final class BackendModuleController extends ActionController
      */
     public function showAction(\Nitsan\MobileCompany\Domain\Model\Mobile $mobile): \Psr\Http\Message\ResponseInterface
     {
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->assign('mobile', $mobile);
-        return new HtmlResponse($moduleTemplate->render('BackendModule/Show'));
+        $this->view->assignmultiple(['mobile' => $mobile, 'listPid' => $this->settings['listPid'] ?? null,]);
+        return $this->htmlResponse();
     }
 }
