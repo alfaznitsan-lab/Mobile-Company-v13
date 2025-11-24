@@ -3,6 +3,7 @@
     <th>id</th>
     <th><f:translate key="tx_mobilecompany_domain_model_mobile.image" /></th>
     <th><f:translate key="tx_mobilecompany_domain_model_mobile.model_name" /></th>
+    <th>Slug</th>
     <th><f:translate key="tx_mobilecompany_domain_model_mobile.brand" /></th>
     <th><f:translate key="tx_mobilecompany_domain_model_mobile.price" /></th>
     <th>Details</th>
@@ -37,6 +38,7 @@
         </f:if>
       </td>
       <td>{mobile.modelName}</td>
+      <td>{mobile.slug}</td>
       <td>{mobile.brand}</td>
       <td>{mobile.price}</td>
       <td><f:link.action action="show" arguments="{mobile : mobile}" class="btn btn-outline-info">Show</f:link.action></td>

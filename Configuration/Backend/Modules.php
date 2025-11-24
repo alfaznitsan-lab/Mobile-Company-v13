@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 return [
-    'mobile_company_module' => [
+    'mobilecompanymodule' => [
         'parent' => 'web', 
         'position' => ['after' => 'web_layout'],
         'access' => 'admin',

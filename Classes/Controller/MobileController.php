@@ -22,6 +22,8 @@ use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use \TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\DataHandling\SlugHelper;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 
 /**
  * MobileController
@@ -168,28 +170,33 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function createAction(\Nitsan\MobileCompany\Domain\Model\Mobile $newMobile)
     {
         $this->mobileRepository->add($newMobile);
-
-        $record = null;
         $this->persistenceManager->persistAll();
+        
+        $uid = $newMobile->getUid();
+        $pid = $newMobile->getPid();
+        
+        $tableName = 'tx_mobilecompany_domain_model_mobile';
+        $slugFieldName = 'slug';
+        $recordArray = [
+            'uid' => $uid,
+            'pid' => $pid,
+            'model_name' => $newMobile->getModelName(), // Use the correct field name from your TCA
+        ];
 
-        if ($record) {
-            $tableName = 'tx_mobilecompany_domain_model_mobile';
-            $slugFieldName = 'slug';
+        $fieldConfig = $GLOBALS['TCA'][$tableName]['columns'][$slugFieldName]['config'] ?? [];
+        $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $tableName, $slugFieldName, $fieldConfig);
 
-            $fieldConfig = $GLOBALS['TCA'][$tableName]['columns'][$slugFieldName]['config'];
-            $slugHelper = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\SlugHelper::class, $tableName, $slugFieldName, $fieldConfig);
+        $slug = $slugHelper->generate($recordArray, $uid);
 
-            $slug = $slugHelper->generate($record, $record['pid']);
+        $evalInfo = GeneralUtility::trimExplode(',', $fieldConfig['eval'] ?? '', true);
 
-            $evalInfo = GeneralUtility::trimExplode(',', $fieldConfig['eval'], true);
-            if (in_array('uniqueInPid', $evalInfo, true)) {
-                $recordState = RecordStateFactory::forName($tableName)->fromArray($record, $record['pid'], $record['uid']);
-                $slug = $slugHelper->buildSlugForUniqueInPid($slug, $recordState);
-            }
-
-            $newMobile->setSlug($slug);
-            $this->mobileRepository->update($newMobile);
+        if (in_array('uniqueInSite', $evalInfo, true)) {
+            $recordState = RecordStateFactory::forName($tableName)->fromArray($recordArray, $recordArray['pid'], $recordArray['uid']);
+            $slug = $slugHelper->buildSlugForUniqueInSite($slug, $recordState);
         }
+
+        $newMobile->setSlug($slug);
+        $this->mobileRepository->update($newMobile);
         
         if($_FILES['tx_mobilecompany_mobilecompanylistplugin']['tmp_name']['image']){
             $newFile = $this->getUploadedFileData(
@@ -222,8 +229,6 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $companyName = $companyData->getname();
             $companyEmail = $companyData->getemail();
             $modelName = $newMobile->getmodelName();
-
-            //DebugUtility::debug($companyEmail, 'output of companyname');
 
             //Sending Mail logic
             $mail = GeneralUtility::makeInstance(MailMessage::class);
@@ -282,23 +287,33 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function updateAction(\Nitsan\MobileCompany\Domain\Model\Mobile $mobile)
     {
         $this->mobileRepository->update($mobile);
-
         $this->persistenceManager->persistAll();
-        $record = null;
-        if ($record) {
-            $tableName = 'tx_mobilecompany_domain_model_mobile';
-            $slugFieldName = 'slug';
-            $fieldConfig = $GLOBALS['TCA'][$tableName]['columns'][$slugFieldName]['config'];
-            $slugHelper = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\SlugHelper::class, $tableName, $slugFieldName, $fieldConfig);
-            $slug = $slugHelper->generate($record, $record['pid']);
-            $evalInfo = GeneralUtility::trimExplode(',', $fieldConfig['eval'], true);
-            if (in_array('uniqueInPid', $evalInfo, true)) {
-                $recordState = RecordStateFactory::forName($tableName)->fromArray($record, $record['pid'], $record['uid']);
-                $slug = $slugHelper->buildSlugForUniqueInPid($slug, $recordState);
-            }
-            $mobile->setSlug($slug);
-            $this->mobileRepository->update($mobile);
+
+        $uid = $mobile->getUid();
+        $pid = $mobile->getPid();
+        
+        $tableName = 'tx_mobilecompany_domain_model_mobile';
+        $slugFieldName = 'slug';
+        $recordArray = [
+            'uid' => $uid,
+            'pid' => $pid,
+            'model_name' => $mobile->getModelName(), // Use the correct field name from your TCA
+        ];
+
+        $fieldConfig = $GLOBALS['TCA'][$tableName]['columns'][$slugFieldName]['config'] ?? [];
+        $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $tableName, $slugFieldName, $fieldConfig);
+
+        $slug = $slugHelper->generate($recordArray, $uid);
+
+        $evalInfo = GeneralUtility::trimExplode(',', $fieldConfig['eval'] ?? '', true);
+
+        if (in_array('uniqueInSite', $evalInfo, true)) {
+            $recordState = RecordStateFactory::forName($tableName)->fromArray($recordArray, $recordArray['pid'], $recordArray['uid']);
+            $slug = $slugHelper->buildSlugForUniqueInSite($slug, $recordState);
         }
+
+        $mobile->setSlug($slug);
+        $this->mobileRepository->update($mobile);
 
         if($_FILES['tx_mobilecompany_mobilecompanylistplugin']['tmp_name']['image']){
             $newFile = $this->getUploadedFileData($_FILES['tx_mobilecompany_mobilecompanylistplugin']['tmp_name']['image'], $_FILES['tx_mobilecompany_mobilecompanylistplugin']['name']['image']);

@@ -1,3 +1,13 @@
+module.tx_mobilecompany_mobilecompanymodule{
+  view {
+    templateRootPaths.0 = EXT:mobile_company/Resources/Private/Templates/BackendModule
+    templateRootPaths.1 = {$module.tx_mobilecompany_mobilecompanymodule.view.templateRootPath}
+    partialRootPaths.0 = EXT:mobile_company/Resources/Private/Partials/
+    partialRootPaths.1 = {$module.tx_mobilecompany_mobilecompanymodule.view.partialRootPath}
+    layoutRootPaths.0 = EXT:mobile_company/Resources/Private/Layouts/
+    layoutRootPaths.1 = {$module.tx_mobilecompany_mobilecompanymodule.view.layoutRootPath}
+  }
+}
 plugin.tx_mobilecompany_mobilecompanyplugin {
   view {
     templateRootPaths.0 = EXT:mobile_company/Resources/Private/Templates/
@@ -54,15 +64,6 @@ plugin.tx_mobilecompany_mobilecompanydetailplugin {
   settings {
     listPid = 18
   }
-}
-
-page{
-  bodyTagCObject = TEXT
-  bodyTagCObject.value = <body class="{$plugin.tx_mobilecompany_mobilecompanyplugin.settings.styles}" style="background-color: {$plugin.tx_mobilecompany_mobilecompanyplugin.settings.backColor};">
-}
-
-page.includeCSS {
-  styles = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.cssFile}
 }
 
 # these classes are only used in auto-generated templates
