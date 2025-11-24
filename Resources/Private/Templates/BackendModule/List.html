@@ -3,34 +3,36 @@
 <f:section name="content">
     <h1>List Of Mobile</h1><br>
     <f:flashMessages />
-    <table class="tx_mobilecompany table table-bordered border-primary table-hover">
-        <tr class="table-dark">
-            <th>id</th>
-            <th><f:translate key="tx_mobilecompany_domain_model_mobile.image" /></th>
-            <th><f:translate key="tx_mobilecompany_domain_model_mobile.model_name" /></th>
-            <th><f:translate key="tx_mobilecompany_domain_model_mobile.brand" /></th>
-            <th><f:translate key="tx_mobilecompany_domain_model_mobile.price" /></th>
-            <th>Details</th>
+    <table style="width: 95%; border: 1px solid #007bff; border-collapse: collapse; margin: auto;">
+        <tr style="background-color: #343a40; color: white;">
+            <th style="padding: 10px; border: 1px solid #007bff;">id</th>
+            <th style="padding: 10px; border: 1px solid #007bff;"><f:translate key="tx_mobilecompany_domain_model_mobile.image" /></th>
+            <th style="padding: 10px; border: 1px solid #007bff;"><f:translate key="tx_mobilecompany_domain_model_mobile.model_name" /></th>
+            <th style="padding: 10px; border: 1px solid #007bff;"><f:translate key="tx_mobilecompany_domain_model_mobile.brand" /></th>
+            <th style="padding: 10px; border: 1px solid #007bff;"><f:translate key="tx_mobilecompany_domain_model_mobile.price" /></th>
+            <th style="padding: 10px; border: 1px solid #007bff;">Details</th>
         </tr>
 
         <f:for each="{mobiles}" as="mobile">
-            <tr>
-            <td>
+            <tr style="border: 1px solid #007bff;">
+            <td style="padding: 10px; border: 1px solid #007bff;">
                 {mobile.uid}
-            <td>
+            <td style="padding: 10px; border: 1px solid #007bff;">
                 <f:if condition="{mobile.image}">
                 <f:then>
-                    <f:image image="{mobile.image.0}" class="img-fluid rounded-start m-1" alt="Mobile Image" width="100px" height="100px"/>
+                    <f:image image="{mobile.image.0}" alt="Mobile Image" width="100px" height="100px" style="max-width: 100%; height: auto; border-radius: 0.25rem; margin: 0.25rem;"/>
                 </f:then>
                 <f:else>
                     No Image
                 </f:else>
                 </f:if>
             </td>
-            <td>{mobile.modelName}</td>
-            <td>{mobile.brand}</td>
-            <td>{mobile.price}</td>
-            <td><f:link.action action="show" arguments="{mobile : mobile}" extensionName="MobileCompany" class="btn btn-outline-info" >Show</f:link.action></td>
+            <td style="padding: 10px; border: 1px solid #007bff;">{mobile.modelName}</td>
+            <td style="padding: 10px; border: 1px solid #007bff;">{mobile.brand}</td>
+            <td style="padding: 10px; border: 1px solid #007bff;">{mobile.price}</td>
+            <td style="padding: 10px; border: 1px solid #007bff;">
+                <f:link.action action="show" arguments="{mobile : mobile}" extensionName="MobileCompany" style="display: inline-block; font-weight: 400; color: #17a2b8; text-align: center; vertical-align: middle; cursor: pointer; background-color: transparent; border: 1px solid #17a2b8; padding: 0.375rem 0.75rem; border-radius: 0.25rem; text-decoration: none;">Show</f:link.action>
+            </td>
             </tr>
         </f:for>
     </table>

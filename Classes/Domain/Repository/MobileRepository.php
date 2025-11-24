@@ -8,8 +8,6 @@ namespace Nitsan\MobileCompany\Domain\Repository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface; 
-use TYPO3\CMS\Core\Resource\ResourceFactory;
 /**
  * This file is part of the "Mobile Company" Extension for TYPO3 CMS.
  *

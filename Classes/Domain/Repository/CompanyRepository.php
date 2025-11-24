@@ -19,4 +19,10 @@ namespace Nitsan\MobileCompany\Domain\Repository;
  */
 class CompanyRepository extends \TYPO3\CMS\Extbase\Persistence\repository
 {
+    public function initializeObject(): void
+    {
+        $querySettings = $this->createQuery()->getQuerySettings();
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 }

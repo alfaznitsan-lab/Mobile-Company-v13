@@ -14,15 +14,6 @@ return [
                 'list', 'show'
             ],
         ],
-        'moduleData' => [
-            'cssFiles' => [
-                'EXT:mobile_company/Resources/Public/Css/bootstrap.min.css',
-                'EXT:mobile_company/Resources/Public/Css/custom.css'
-            ],
-            'javascriptFiles' => [
-                'EXT:mobile_company/Resources/Public/JavaScript/bootstrap.bundle.min.js'
-            ]
-        ]
     ],
 ];
 

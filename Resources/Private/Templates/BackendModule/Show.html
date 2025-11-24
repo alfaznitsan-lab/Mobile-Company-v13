@@ -2,45 +2,68 @@
 <f:layout name="Module" />
 <f:section name="content">
 	<h1>Details Of Mobile - {mobile.modelName}</h1><br>
-    <table class="tx-mobile-company table table-bordered table-striped">
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.model_name" /></td>
-			<td class="text-success">{mobile.modelName}</td>
+    <!-- Replaced table classes with inline styles -->
+    <table style="width: 100%; border: 1px solid #dee2e6; border-collapse: collapse;">
+		<tr style="border: 1px solid #dee2e6;">
+			<!-- Replaced text-info with inline style -->
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.model_name" />
+            </td>
+			<!-- Replaced text-success with inline style -->
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">{mobile.modelName}</td>
 		</tr>
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.brand" /></td>
-			<td class="text-success">{mobile.brand}</td>
+		<tr style="border: 1px solid #dee2e6;">
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.brand" />
+            </td>
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">{mobile.brand}</td>
 		</tr>
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.price" /></td>
-			<td class="text-success">{mobile.price}</td>
+		<tr style="border: 1px solid #dee2e6;">
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.price" />
+            </td>
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">{mobile.price}</td>
 		</tr>
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.release_date" /></td>
-			<td class="text-success"><f:format.date format="Y-m-d">{mobile.releaseDate}</f:format.date></td>
+		<tr style="border: 1px solid #dee2e6;">
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.release_date" />
+            </td>
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">
+                <f:format.date format="Y-m-d">{mobile.releaseDate}</f:format.date>
+            </td>
 		</tr>
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.specifications" /></td>
-			<td class="text-success"><f:format.stripTags>{mobile.specifications}</f:format.stripTags></td>
+		<tr style="border: 1px solid #dee2e6;">
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.specifications" />
+            </td>
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">
+                <f:format.stripTags>{mobile.specifications}</f:format.stripTags>
+            </td>
 		</tr>
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.image" /></td>
-			<td class="text-success">
+		<tr style="border: 1px solid #dee2e6;">
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.image" />
+            </td>
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">
 				<f:if condition="{mobile.image}">
 					<f:then>
 					<f:for each="{mobile.image}" as="image">
-						<f:image image="{image}" width="200"/>
+						<f:image image="{image}" width="200" style="max-width: 100%; height: auto;"/>
 					</f:for>
 					</f:then>
-					<f:else><span class="text-danger">Add image for this model</span></f:else>
+					<!-- Replaced text-danger with inline style -->
+					<f:else><span style="color: #dc3545;">Add image for this model</span></f:else>
 				</f:if>
 			</td>
 		</tr>
-		<tr>
-			<td class="text-info"><f:translate key="tx_mobilecompany_domain_model_mobile.companies" /></td>
-			<td class="text-success">{mobile.companies.name}</td>
+		<tr style="border: 1px solid #dee2e6;">
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #17a2b8;">
+                <f:translate key="tx_mobilecompany_domain_model_mobile.companies" />
+            </td>
+			<td style="padding: 10px; border: 1px solid #dee2e6; color: #28a745;">{mobile.companies.name}</td>
 		</tr>
 	</table><br>
-    <f:link.action action="list" class="btn btn-outline-primary">Back to list</f:link.action>
+    <!-- Replaced button classes with inline styles -->
+    <f:link.action action="list" style="display: inline-block; font-weight: 400; color: #007bff; text-align: center; vertical-align: middle; cursor: pointer; background-color: transparent; border: 1px solid #007bff; padding: 0.375rem 0.75rem; border-radius: 0.25rem; text-decoration: none;">Back to list</f:link.action>
 </f:section>
 </html>

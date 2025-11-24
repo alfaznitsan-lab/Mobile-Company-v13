@@ -9,7 +9,6 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Nitsan\MobileCompany\Domain\Repository\MobileRepository;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 #[AsController]
 final class BackendModuleController extends ActionController
@@ -38,7 +37,7 @@ final class BackendModuleController extends ActionController
     /**
      * action show
      */
-    public function showAction(\Nitsan\MobileCompany\Domain\Model\Mobile $mobile): \Psr\Http\Message\ResponseInterface
+    public function showAction(\Nitsan\MobileCompany\Domain\Model\Mobile $mobile): ResponseInterface
     {
         $this->view->assignmultiple(['mobile' => $mobile, 'listPid' => $this->settings['listPid'] ?? null,]);
         return $this->htmlResponse();
