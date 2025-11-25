@@ -22,7 +22,6 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
  */
 class Mobile extends AbstractEntity
 {
-
     /**
      * Mobile model name
      *

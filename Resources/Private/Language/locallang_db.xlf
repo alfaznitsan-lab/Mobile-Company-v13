@@ -132,6 +132,27 @@
 			<trans-unit id="tx_mobilecompany_domain_model_mobile.image.addImage" resname="tx_mobilecompany_domain_model_mobile.image.addImage">
 				<source>Add Mobile Image</source>
 			</trans-unit>
+			<trans-unit id="tx_mobilecompany_domain_model_blog">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="tx_mobilecompany_domain_model_blog.description">
+				<source>Blog Discription</source>
+			</trans-unit>
+			<trans-unit id="tx_mobilecompany_domain_model_blog.cover_image">
+				<source>Cover Image</source>
+			</trans-unit>
+
+			<trans-unit id="tx_mobilecompany_domain_model_blog.is_featured">
+				<source>Is Featured</source>
+			</trans-unit>
+
+			<trans-unit id="tx_blog_domain_model_tag.meta_keywords" resname="tx_blog_domain_model_tag.meta_keywords">
+				<source>Meta Keywords</source>
+			</trans-unit>
+
+            <trans-unit id="tx_blog_domain_model_author.company_name" xml:space="preserve">
+                <source>Company Name</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

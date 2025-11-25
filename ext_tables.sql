@@ -19,3 +19,16 @@ CREATE TABLE tx_mobilecompany_domain_model_company (
 	description  text NOT NULL DEFAULT '',
 	mobiles      int(11) unsigned NOT NULL DEFAULT '0'
 );
+
+CREATE TABLE pages (
+    cover_image int(11) unsigned DEFAULT '0' NOT NULL,
+	is_featured tinyint(4) unsigned DEFAULT '0' NOT NULL,
+);
+
+CREATE TABLE tx_blog_domain_model_tag (
+    meta_keywords text,
+);
+
+CREATE TABLE tx_blog_domain_model_author (
+    company_name varchar(255) DEFAULT '' NOT NULL,
+);

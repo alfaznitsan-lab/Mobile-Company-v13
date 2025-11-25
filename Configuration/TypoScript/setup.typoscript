@@ -67,7 +67,7 @@ plugin.tx_mobilecompany_mobilecompanydetailplugin {
 }
 
 # these classes are only used in auto-generated templates
-plugin.tx_mobilecompany._CSS_DEFAULT_STYLE (
+module.tx_mobilecompany_mobilecompanymodule._CSS_DEFAULT_STYLE (
   textarea.f3-form-error {
     background-color: #FF9F9F;
     border: 1px #FF0000 solid;
@@ -78,24 +78,100 @@ plugin.tx_mobilecompany._CSS_DEFAULT_STYLE (
     border: 1px #FF0000 solid;
   }
 
-  .tx-mobile-company table {
-    border-collapse: separate;
-    border-spacing: 10px;
-  }
-
-  .tx-mobile-company table th {
-    font-weight: bold;
-  }
-
-  .tx-mobile-company table td {
-    vertical-align: top;
-  }
-
   .typo3-messages .message-error {
     color: red;
   }
 
   .typo3-messages .message-ok {
     color: green;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background: #f7f9fc;
+    margin: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 20px;
+  }
+
+  .tx_mobilecompany {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tx_mobilecompany th {
+    background: #343a40;
+    color: #ffffff;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  .tx_mobilecompany td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+
+  .tx_mobilecompany tr:hover {
+    background: #f1f3f5;
+  }
+
+  .tx_mobilecompany tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+
+  .tx_mobilecompany img {
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    padding: 3px;
+  }
+
+  .btn-outline-info {
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    transition: 0.2s ease-in-out;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #0dcaf0;
+    color: white;
+  }
+
+  .flasMessages {
+    margin-bottom: 15px;
+  }
+
+  .table-bordered {
+    border-width: 2px !important;
+    border-color: #0d6efd !important;
+  }
+
+  .First-CSS{
+    color: black;
+    margin: 200px auto;
+    width: 50%;
+    border: 3px solid white;
+    padding: 10px;
+  }
+  .Second-CSS{
+    color: white;
+    margin: 200px auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
   }
 )
