@@ -153,6 +153,9 @@
             <trans-unit id="tx_blog_domain_model_author.company_name" xml:space="preserve">
                 <source>Company Name</source>
             </trans-unit>
+			<trans-unit id="tx_blog_domain_model_author.palette.contact" xml:space="preserve">
+                <source>Contact Palate</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

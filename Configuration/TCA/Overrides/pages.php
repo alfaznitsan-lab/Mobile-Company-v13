@@ -1,15 +1,17 @@
 <?php
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
+
+$ll = 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:';
 
 $fields = [
     'cover_image' => [
         'exclude' => 1,
-        'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:pages.cover_image',
+        'label' => $ll . 'tx_mobilecompany_domain_model_blog.cover_image',
         'config' => [
             'type' => 'file',
             'appearance' => [
                 'collapseAll' => true,
-                'showPossibleLocalizationRecords' => true,
+                'showPossibleLocalizationRecords' => true, 
                 'showRemovedLocalizationRecords' => true,
                 'showAllLocalizationLink' => true,
                 'showSynchronizationLink' => true,
@@ -17,11 +19,10 @@ $fields = [
             'maxitems' => 1,
             'allowed' => 'common-image-types',
         ],
-        'displayCond' => 'FIELD:is_featured:REQ:true',
     ],
     'is_featured' => [
         'exclude' => 1,
-        'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:pages.is_featured',
+        'label' => $ll . 'tx_mobilecompany_domain_model_blog.is_featured',
         'config' => [
             'type' => 'check',
             'renderType' => 'checkboxLabeledToggle',
@@ -38,4 +39,9 @@ $fields = [
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $fields);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;Blog Enhancements, is_featured, cover_image');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+    'pages',
+    '--div--;LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:pages.tab.blog_enhancements, is_featured, cover_image',
+    '',
+    'after:description'
+);

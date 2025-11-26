@@ -1,10 +1,12 @@
 <?php
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
-$tempColumns = [
+$ll = 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:';
+
+$fields = [
     'meta_keywords' => [
         'exclude' => 1,
-        'label' => 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_blog_domain_model_tag.meta_keywords',
+        'label' => $ll . 'tx_blog_domain_model_tag.meta_keywords',
         'config' => [
             'type' => 'text',
             'cols' => 40,
@@ -12,22 +14,22 @@ $tempColumns = [
         ],
     ],
 ];
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_blog_domain_model_tag', $tempColumns);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_blog_domain_model_tag', $fields);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToPalette(
+if (!isset($GLOBALS['TCA']['tx_blog_domain_model_tag']['palettes']['seo'])) {
+    $GLOBALS['TCA']['tx_blog_domain_model_tag']['palettes']['seo'] = ['showitem' => ''];
+}
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
     'tx_blog_domain_model_tag',
     'seo',
     'meta_keywords',
     ''
 );
 
-if (!isset($GLOBALS['TCA']['tx_blog_domain_model_tag']['palettes']['seo'])) {
-    $GLOBALS['TCA']['tx_blog_domain_model_tag']['palettes']['seo'] = ['showitem' => 'meta_keywords'];
-}
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'tx_blog_domain_model_tag',
-    '--palette--;SEO;seo',
+    '--palette--;LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_blog_domain_model_tag.palette.seo;seo',
     '',
     'after:content'
 );
