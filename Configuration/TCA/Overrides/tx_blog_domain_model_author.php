@@ -24,10 +24,6 @@ $fields = [
 ];
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_blog_domain_model_author', $fields);
 
-if (!isset($GLOBALS['TCA']['tx_blog_domain_model_author']['palettes']['palette_contact'])) {
-    $GLOBALS['TCA']['tx_blog_domain_model_author']['palettes']['palette_contact'] = ['showitem' => ''];
-}
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
     'tx_blog_domain_model_author',
     'palette_contact',

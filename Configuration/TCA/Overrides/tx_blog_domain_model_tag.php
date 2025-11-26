@@ -16,10 +16,6 @@ $fields = [
 ];
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tx_blog_domain_model_tag', $fields);
 
-if (!isset($GLOBALS['TCA']['tx_blog_domain_model_tag']['palettes']['seo'])) {
-    $GLOBALS['TCA']['tx_blog_domain_model_tag']['palettes']['seo'] = ['showitem' => ''];
-}
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
     'tx_blog_domain_model_tag',
     'seo',

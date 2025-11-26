@@ -2,6 +2,18 @@
 defined('TYPO3') or die();
 
 (static function() {
+    /*$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][T3G\AgencyPack\Blog\Domain\Model\Post::class] = [
+        'className' => \Nitsan\MobileCompany\Domain\Model\Post::class,
+    ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][T3G\AgencyPack\Blog\Domain\Model\Author::class] = [
+        'className' => \Nitsan\MobileCompany\Domain\Model\Author::class,
+    ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][T3G\AgencyPack\Blog\Domain\Model\Tag::class] = [
+        'className' => \Nitsan\MobileCompany\Domain\Model\Tag::class,
+    ];*/
+
     TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'MobileCompany',
         'Mobilecompanyplugin',

@@ -25,12 +25,11 @@ $fields = [
         'label' => $ll . 'tx_mobilecompany_domain_model_blog.is_featured',
         'config' => [
             'type' => 'check',
-            'renderType' => 'checkboxLabeledToggle',
+            'renderType' => 'checkboxToggle',
             'items' => [
                 [
-                    0 => '',
-                    1 => '',
-                    'invertStateAndDBValue' => true
+                    'label' => 'Enable',
+                    'invertStateDisplay' => true,
                 ]
             ],
         ],
@@ -39,9 +38,16 @@ $fields = [
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $fields);
 
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
+    'pages',
+    'blog',
+    'cover_image, is_featured',
+    ''
+);
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'pages',
-    '--div--;LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:pages.tab.blog_enhancements, is_featured, cover_image',
+    '--palette--;LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:tx_mobilecompany_domain_model_blog;blog',
     '',
-    'after:description'
+    'after:publish_date'
 );

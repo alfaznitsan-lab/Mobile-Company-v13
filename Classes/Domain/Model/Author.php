@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Nitsan\MobileCompany\Domain\Model;
 
-class ExtendedAuthor extends T3G\AgencyPack\Blog\Domain\Model\Author
+class Author extends T3G\AgencyPack\Blog\Domain\Model\Author
 {
     protected ?string $companyName = '';
 

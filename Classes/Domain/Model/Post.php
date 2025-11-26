@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Nitsan\MobileCompany\Domain\Model;
 
-class ExtendedPage extends \TYPO3\CMS\Frontend\Domain\Model\Page
+class Post extends T3G\AgencyPack\Blog\Domain\Model\Post
 {
     protected ?\TYPO3\CMS\Extbase\Domain\Model\FileReference $coverImage = null;
     protected bool $isFeatured = false;

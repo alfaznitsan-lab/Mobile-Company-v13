@@ -133,7 +133,7 @@
 				<source>Add Mobile Image</source>
 			</trans-unit>
 			<trans-unit id="tx_mobilecompany_domain_model_blog">
-				<source>Blog</source>
+				<source>Display on Frontend</source>
 			</trans-unit>
 			<trans-unit id="tx_mobilecompany_domain_model_blog.description">
 				<source>Blog Discription</source>
