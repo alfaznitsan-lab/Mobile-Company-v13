@@ -1,35 +1,39 @@
-module.tx_mobilecompany_mobilecompanymodule{
-  view {
-    templateRootPaths.0 = EXT:mobile_company/Resources/Private/Templates/BackendModule
-    templateRootPaths.1 = {$module.tx_mobilecompany_mobilecompanymodule.view.templateRootPath}
-    partialRootPaths.0 = EXT:mobile_company/Resources/Private/Partials/
-    partialRootPaths.1 = {$module.tx_mobilecompany_mobilecompanymodule.view.partialRootPath}
-    layoutRootPaths.0 = EXT:mobile_company/Resources/Private/Layouts/
-    layoutRootPaths.1 = {$module.tx_mobilecompany_mobilecompanymodule.view.layoutRootPath}
+config.contentObjectExceptionHandler=0
+@import "EXT:blog/Configuration/Sets/Static/setup.typoscript"
+
+plugin.tx_blog {
+  post {
+    coverImage{
+      width = {$plugin.tx_blog.settings.post.coverImage.width}
+      height = {$plugin.tx_blog.settings.post.coverImage.height}
+    }
   }
 }
-plugin.tx_mobilecompany_mobilecompanyplugin {
-  view {
-    templateRootPaths.0 = EXT:mobile_company/Resources/Private/Templates/
-    templateRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.templateRootPath}
-    partialRootPaths.0 = EXT:mobile_company/Resources/Private/Partials/
-    partialRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.partialRootPath}
-    layoutRootPaths.0 = EXT:mobile_company/Resources/Private/Layouts/
-    layoutRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.layoutRootPath}
+[blog.isPost() || blog.isPage()]
+page {
+  10 {
+    templateName >
+    templateName = BlogList
+    layoutRootPaths.10 = EXT:mobile_company/Resources/Private/Layouts/Page/
+    templateRootPaths.10 = EXT:mobile_company/Resources/Private/Templates/Page/
   }
-  persistence {
-    storagePid = {$plugin.tx_mobilecompany_mobilecompanyplugin.persistence.storagePid}
-    #recursive = 1
-  }
-  features {
-    #skipDefaultArguments = 1
-    # if set to 1, the enable fields are ignored in BE context
-    ignoreAllEnableFieldsInBe = 0
-  }
-  mvc {
-    #callDefaultActionIfActionCantBeResolved = 1
+  dataProcessing {
+    10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+    10 {
+      fieldName = cover_image
+      as = coverImageObjects
+    }
   }
 }
+[end]
+
+[blog.isPost()]
+page {
+    10 {
+        templateName = BlogPost
+    }
+}
+[end]
 
 
 plugin.tx_mobilecompany_mobilecompanylistplugin {

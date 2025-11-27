@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Nitsan\MobileCompany\Domain\Model;
 
-class Tag extends T3G\AgencyPack\Blog\Domain\Model\Tag
+class Tag extends \T3G\AgencyPack\Blog\Domain\Model\Tag
 {
     protected ?string $MetaKeywords = '';
 

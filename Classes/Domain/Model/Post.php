@@ -2,22 +2,24 @@
 declare(strict_types=1);
 
 namespace Nitsan\MobileCompany\Domain\Model;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
-class Post extends T3G\AgencyPack\Blog\Domain\Model\Post
+class Post extends \T3G\AgencyPack\Blog\Domain\Model\Post
 {
-    protected ?\TYPO3\CMS\Extbase\Domain\Model\FileReference $coverImage = null;
+    protected ?FileReference $coverImage = null;
+
     protected bool $isFeatured = false;
 
-    public function getCoverImage(): ?\TYPO3\CMS\Extbase\Domain\Model\FileReference
+    public function getCoverImage(): ?FileReference
     {
         return $this->coverImage;
     }
 
-    public function setCoverImage(?\TYPO3\CMS\Extbase\Domain\Model\FileReference $coverImage): void
+    public function setCoverImage(?FileReference $coverImage): self
     {
         $this->coverImage = $coverImage;
+        return $this;
     }
-
     public function getIsFeatured(): bool
     {
         return $this->isFeatured;
