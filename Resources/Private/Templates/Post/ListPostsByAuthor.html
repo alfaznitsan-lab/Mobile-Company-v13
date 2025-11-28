@@ -1,0 +1,58 @@
+<f:layout name="Default" />
+<f:section name="Content">
+    <f:if condition="{author}">
+        <f:then>
+            <header class="blogarchiveheader blogarchiveheader--author">
+                <h1 class="blogarchiveheader__title">
+                    <span class="blogarchiveheader__titletext">
+                        <f:translate key="headline.author.simple" />:
+                        {author.name}
+                    </span>
+                    <blogvh:link.author class="blogarchiveheader__titlelink" rss="true" author="{author}">
+                        <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
+                    </blogvh:link.author>
+                </h1>
+                <f:if condition="{author.bio}">
+                    <div class="blogarchiveheader__description">
+                        <p>{author.bio}</p>
+                        <p><b>company:</b> {author.companyName} <b>email</b>: {author.email} <b>website:</b> {author.website}</p>
+                    </div>
+                </f:if>
+                <f:if condition="{author.allTags}">
+                    <div class="blogarchiveheader__taxonomy blogarchiveheader__taxonomy--tags">
+                        <ul class="blogtaglist">
+                            <f:for each="{author.allTags}" as="tag">
+                                <li class="blogtaglist__item"><blogvh:link.tag class="blogbadge" tag="{tag}"/></li>
+                            </f:for>
+                        </ul>
+                    </div>
+                </f:if>
+            </header>
+            <f:render partial="List" arguments="{_all}" />
+            <f:if condition="{settings.authorUid}">
+                <footer class="blogarchivefooter blogarchivefooter--author">
+                    <div class="blogarchivefooter__backlink">
+                        <f:link.page pageUid="{settings.authorUid}">
+                            <f:translate key="list.backlink.authors" />
+                        </f:link.page>
+                    </div>
+                </footer>
+            </f:if>
+
+        </f:then>
+        <f:else>
+
+            <header class="blogarchiveheader blogarchiveheader--authors">
+                <h1 class="blogarchiveheader__title">
+                    <span class="blogarchiveheader__titletext"><f:translate key="headline.authors" /></span>
+                </h1>
+            </header>
+            <div class="bloglist bloglist--authors">
+                <f:for each="{authors}" as="author">
+                    <f:render partial="List/Author" arguments="{_all}" />
+                </f:for>
+            </div>
+
+        </f:else>
+    </f:if>
+</f:section>

@@ -1,12 +1,8 @@
 config.contentObjectExceptionHandler=0
-@import "EXT:blog/Configuration/Sets/Static/setup.typoscript"
 
-plugin.tx_blog {
-  post {
-    coverImage{
-      width = {$plugin.tx_blog.settings.post.coverImage.width}
-      height = {$plugin.tx_blog.settings.post.coverImage.height}
-    }
+plugin.tx_blog.view {
+  templateRootPaths {
+    10 = EXT:mobile_company/Resources/Private/Templates/
   }
 }
 [blog.isPost() || blog.isPage()]
@@ -17,21 +13,14 @@ page {
     layoutRootPaths.10 = EXT:mobile_company/Resources/Private/Layouts/Page/
     templateRootPaths.10 = EXT:mobile_company/Resources/Private/Templates/Page/
   }
-  dataProcessing {
-    10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-    10 {
-      fieldName = cover_image
-      as = coverImageObjects
-    }
-  }
 }
 [end]
 
 [blog.isPost()]
 page {
-    10 {
-        templateName = BlogPost
-    }
+  10 {
+    templateName = BlogPost
+  }
 }
 [end]
 

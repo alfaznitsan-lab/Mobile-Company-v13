@@ -1,0 +1,56 @@
+<f:layout name="Default" />
+<f:section name="Content">
+    <f:if condition="{tag}">
+        <f:then>
+
+            <header class="blogarchiveheader blogarchiveheader--tag">
+                <h1 class="blogarchiveheader__title">
+                    <span class="page__titletext">
+                        <f:translate key="headline.tag.simple" />:
+                        {tag.title}
+                    </span>
+                    <blogvh:link.tag class="page__titlelink" rss="true" tag="{tag}">
+                        <span class="blogicon"><f:render partial="General/SocialIcons" section="Rss" optional="true" /></span>
+                    </blogvh:link.tag>
+                </h1>
+                <div class="blogarchiveheader__description">
+                    <p>{tag.description}</p>
+                    <p><b>Meta Keywords:</b> {tag.metaKeywords}</p>
+                </div>
+            </header>
+            <f:render partial="List" arguments="{_all}" />
+            <f:if condition="{settings.tagUid} || {tag.content}">
+                <footer class="blogarchivefooter blogarchivefooter--tag">
+                    <f:if condition="{settings.tagUid}">
+                        <div class="blogarchivefooter__backlink">
+                            <f:link.page pageUid="{settings.tagUid}">
+                                <f:translate key="list.backlink.tags" />
+                            </f:link.page>
+                        </div>
+                    </f:if>
+                    <f:if condition="{tag.content}">
+                        <div class="blogarchivefooter__content">
+                            <f:cObject typoscriptObjectPath="lib.blog.contentElementRendering">{tag.contentElementUidList}</f:cObject>
+                        </div>
+                    </f:if>
+                </footer>
+            </f:if>
+        </f:then>
+        <f:else>
+
+            <header class="blogarchiveheader blogarchiveheader--tags">
+                <h1 class="blogarchiveheader__title">
+                    <span class="blogarchiveheader__titletext">
+                        <f:translate key="headline.tags" />
+                    </span>
+                </h1>
+            </header>
+            <div class="bloglist bloglist--tag">
+                <f:for each="{tags}" as="tag">
+                    <f:render partial="List/Tag" arguments="{_all}" />
+                </f:for>
+            </div>
+
+        </f:else>
+    </f:if>
+</f:section>

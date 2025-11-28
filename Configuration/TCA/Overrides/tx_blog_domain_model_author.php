@@ -1,6 +1,10 @@
 <?php
 defined('TYPO3') or die();
 
+use Nitsan\MobileCompany\Domain\Model\ExtendedAuthor;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 $ll = 'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf:';
 
 $GLOBALS['TCA']['tx_blog_domain_model_author']['columns']['bio']['config'] = [

@@ -4,18 +4,6 @@
     <div class="container">
         <div class="blogcontainer">
             <main class="blogcontainer-main" role="main">
-                <h1>Mobile_company</h1>
-                <f:debug>{_all}</f:debug>
-                <f:if condition="{data.is_featured} == 1">
-                    <f:if condition="{data.cover_image}">
-                        <f:then>
-                            <f:image src="{data.uid}" treatIdAsReference="1" class="img-fluid rounded-start m-1" alt="Mobile Image" width="100px" height="100px"/>
-                        </f:then>
-                        <f:else>
-                            No Image
-                        </f:else>
-                    </f:if>
-                </f:if>
                 <f:render section="renderPlugin" arguments="{listType: 'blog_header'}" />
                 <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos: '0'}" />
                 <f:render section="renderPlugin" arguments="{listType: 'blog_footer'}" />

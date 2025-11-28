@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Nitsan\MobileCompany\Domain\Model;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use T3G\AgencyPack\Blog\Domain\Model\Post;
 
-class Post extends \T3G\AgencyPack\Blog\Domain\Model\Post
+class ExtendedPost extends Post
 {
     protected ?FileReference $coverImage = null;
 
