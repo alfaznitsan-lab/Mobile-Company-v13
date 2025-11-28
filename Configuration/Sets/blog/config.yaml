@@ -1,0 +1,4 @@
+name: Nitsan/blog
+label: Blog
+dependencies:
+  - Nitsan/mobile_company

@@ -1,0 +1,23 @@
+plugin.tx_blog.view {
+  templateRootPaths {
+    10 = EXT:mobile_company/Resources/Private/Templates/
+  }
+}
+[blog.isPost() || blog.isPage()]
+page {
+  10 {
+    templateName >
+    templateName = BlogList
+    layoutRootPaths.10 = EXT:mobile_company/Resources/Private/Layouts/Page/
+    templateRootPaths.10 = EXT:mobile_company/Resources/Private/Templates/Page/
+  }
+}
+[end]
+
+[blog.isPost()]
+page {
+  10 {
+    templateName = BlogPost
+  }
+}
+[end]
