@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\SysLog\Action as SystemLogGenericAction;
 use TYPO3\CMS\Core\SysLog\Error as SystemLogErrorClassification;
 use TYPO3\CMS\Core\SysLog\Type as SystemLogType;
 
-final class MyEventListener
+final class ActivePackage
 {
 
     public function __invoke(AfterPackageActivationEvent $event): void{
@@ -34,12 +34,10 @@ final class MyEventListener
             if ($backendUser instanceof BackendUserAuthentication) {
                 if (isset($backendUser->user['uid'])) {
                     $userId = (int)$backendUser->user['uid'];
-                    DebugUtility::debug($userId);
                 }
                 $workspace = (int)$backendUser->workspace;
                 if ($backUserId = $backendUser->getOriginalUserIdWhenInSwitchUserMode()) {
                     $data['originalUser'] = (int)$backUserId;
-                    DebugUtility::debug($data);
                 }
             }
 

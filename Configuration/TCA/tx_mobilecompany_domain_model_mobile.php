@@ -204,6 +204,7 @@ return [
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_mobilecompany_domain_model_company',
                 'required' => true,
+                'default' => '',
             ],
         ],
     

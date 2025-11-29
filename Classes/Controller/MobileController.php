@@ -101,36 +101,38 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function listAction(): \Psr\Http\Message\ResponseInterface
-    {        
-        $filterBrand = $this->request->hasArgument('filterBrand') ? $this->request->getArgument('filterBrand') : '';
-        $filterName = $this->request->hasArgument('filterName') ? $this->request->getArgument('filterName') : '';
-        $filterPrize = $this->request->hasArgument('filterPrize') ? $this->request->getArgument('filterPrize') : '';
+{        
+    // Use the null coalescing operator (??) for safer argument access
+    $filterBrand = $this->request->hasArgument('filterBrand') ? $this->request->getArgument('filterBrand') : ($this->request->getArguments()['filterBrand'] ?? '');
+    $filterName = $this->request->hasArgument('filterName') ? $this->request->getArgument('filterName') : ($this->request->getArguments()['filterName'] ?? '');
+    $filterPrize = $this->request->hasArgument('filterPrize') ? $this->request->getArgument('filterPrize') : ($this->request->getArguments()['filterPrize'] ?? '');
+    $filteredMobiles = $this->mobileRepository->findByFilters($filterName, $filterBrand, $filterPrize)->toArray();
 
-        $filteredMobiles = $this->mobileRepository->findByFilters($filterName, $filterBrand, $filterPrize)->toArray();
+    $itemsPerPage = (int)($this->settings['itemsPerPage'] ?? 5);
+    // Use the safer method for currentPageNumber as well
+    $currentPageNumber = $this->request->hasArgument('currentPageNumber') ? (int)$this->request->getArgument('currentPageNumber') : 1;
 
-        $itemsPerPage = (int)($this->settings['itemsPerPage'] ?? 5);
-        $currentPageNumber = $this->request->hasArgument('currentPageNumber')?(int)$this->request->getArgument('currentPageNumber'): 1;
-
-        if ($filteredMobiles) {
-            $paginator = new ArrayPaginator($filteredMobiles, $currentPageNumber, $itemsPerPage);    
-        }else{
-            $filteredMobiles = [];
-            $paginator = new ArrayPaginator($filteredMobiles, $currentPageNumber, $itemsPerPage);
-        }
-        $pagination = new SimplePagination($paginator);
-
-        $this->view->assignMultiple(
-            [
-                'paginator' => $paginator,
-                'pagination' => $pagination,
-                'detailPid' => $this->settings['detailPid'] ?? null,
-                'filterBrand' => $filterBrand,
-                'filterName' => $filterName,
-                'filterPrize' => $filterPrize,
-            ],
-        );
-        return $this->htmlResponse();
+    if ($filteredMobiles) {
+        $paginator = new ArrayPaginator($filteredMobiles, $currentPageNumber, $itemsPerPage);    
+    }else{
+        $filteredMobiles = [];
+        $paginator = new ArrayPaginator($filteredMobiles, $currentPageNumber, $itemsPerPage);
     }
+    $pagination = new SimplePagination($paginator);
+
+    $this->view->assignMultiple(
+        [
+            'paginator' => $paginator,
+            'pagination' => $pagination,
+            'detailPid' => $this->settings['detailPid'] ?? null,
+            'filterBrand' => $filterBrand,
+            'filterName' => $filterName,
+            'filterPrize' => $filterPrize,
+        ],
+    );
+    return $this->htmlResponse();
+}
+
 
     /**
      * action show
@@ -223,7 +225,6 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
 
         $companyData = $newMobile->getcompanies();
-        //DebugUtility::debug($companyData, 'output of companyid');
 
         if ($companyData) {
             $companyName = $companyData->getname();
@@ -314,27 +315,6 @@ class MobileController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $mobile->setSlug($slug);
         $this->mobileRepository->update($mobile);
-
-        if($_FILES['tx_mobilecompany_mobilecompanylistplugin']['tmp_name']['image']){
-            $newFile = $this->getUploadedFileData($_FILES['tx_mobilecompany_mobilecompanylistplugin']['tmp_name']['image'], $_FILES['tx_mobilecompany_mobilecompanylistplugin']['name']['image']);
-            
-            $fileData = $newFile->getProperties();
-            if ($fileData) {
-                $this->mobileRepository->updateSysFileReferenceRecord(
-                    (int)$fileData['uid'],
-                    (int)$mobile->getUid(),
-                    (int)$mobile->getPid(),
-                    'tx_mobilecompany_domain_model_mobile',
-                    'image'
-                );
-                $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-                $fileObjects = $fileRepository->findByRelation(
-                    'tx_mobilecompany_domain_model_mobile',
-                    'image',
-                    $mobile->getUid()
-                );
-            }
-        }
         $this->addFlashMessage('The object was updated.', '', ContextualFeedbackSeverity::INFO);
         return $this->redirect('list');
     }

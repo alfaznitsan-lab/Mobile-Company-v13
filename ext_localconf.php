@@ -1,5 +1,4 @@
 <?php
-
 use T3G\AgencyPack\Blog\Domain\Model\PostRepository;
 use Nitsan\MobileCompany\Domain\Model\ExtendedPostRepository;
 use T3G\AgencyPack\Blog\Domain\Model\Post;

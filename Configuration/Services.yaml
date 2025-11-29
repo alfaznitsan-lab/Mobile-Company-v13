@@ -15,7 +15,7 @@ services:
         description: 'Deletes old mobilecompany records.'
         schedulable: true
 
-  Nitsan\MobileCompany\EventListener\MyEventListener:
+  Nitsan\MobileCompany\EventListener\ActivePackage:
     tags:
       - name: event.listener
         identifier: 'MobileCompany/extension-activated'

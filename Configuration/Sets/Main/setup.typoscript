@@ -1,12 +1,14 @@
-@import 'constants.typoscript'
 config.contentObjectExceptionHandler=0
 
 plugin.tx_mobilecompany_mobilecompanylistplugin {
   view {
+    # cat=plugin.tx_mobilecompany_mobilecompanylistplugin/file; type=string; label=Path to template root (FE)
     templateRootPaths.0 = EXT:mobile_company/Resources/Private/Templates/
     templateRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.templateRootPath}
+    # cat=plugin.tx_mobilecompany_mobilecompanylistplugin/file; type=string; label=Path to template partials 
     partialRootPaths.0 = EXT:mobile_company/Resources/Private/Partials/
     partialRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.partialRootPath}
+    # cat=plugin.tx_mobilecompany_mobilecompanylistplugin/file; type=string; label=Path to template layouts 
     layoutRootPaths.0 = EXT:mobile_company/Resources/Private/Layouts/
     layoutRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.layoutRootPath}
   }
@@ -20,10 +22,13 @@ plugin.tx_mobilecompany_mobilecompanylistplugin {
 
 plugin.tx_mobilecompany_mobilecompanydetailplugin {
   view {
+    # cat=plugin.tx_mobilecompany_mobilecompanydetailplugin/file; type=string; label=Path to template root (FE)
     templateRootPaths.0 = EXT:mobile_company/Resources/Private/Templates/
     templateRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.templateRootPath}
+    # cat=plugin.tx_mobilecompany_mobilecompanydetailplugin/file; type=string; label=Path to template partials 
     partialRootPaths.0 = EXT:mobile_company/Resources/Private/Partials/
     partialRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.partialRootPath}
+    # cat=plugin.tx_mobilecompany_mobilecompanydetailplugin/file; type=string; label=Path to template layouts 
     layoutRootPaths.0 = EXT:mobile_company/Resources/Private/Layouts/
     layoutRootPaths.1 = {$plugin.tx_mobilecompany_mobilecompanyplugin.view.layoutRootPath}
   }

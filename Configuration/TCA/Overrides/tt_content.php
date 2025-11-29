@@ -4,22 +4,25 @@ defined('TYPO3') || die();
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-$extensionKey = 'mobile_company';
-
 // --- Main Plugin ---
 $pluginSignatureMain = ExtensionUtility::registerPlugin(
-    $extensionKey,
+    'MobileCompany',
     'Mobilecompanyplugin',
     'Mobile Company Plugin',
-    'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf: tx_mobile_company_mobilecompanylistplugin.name'
+    'mobile_company-plugin-mobilecompanyplugin',
+    'plugins',
+    'This is default plugin from MobileCompany extention'
 );
 
 // --- Mobile List Plugin ---
 $pluginSignatureList = ExtensionUtility::registerPlugin(
-    $extensionKey,
+    'MobileCompany',
     'Mobilecompanylistplugin',
     'Mobile List Plugin',
-    'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf: tx_mobile_company_mobilecompanylistplugin.name'
+    'mobile_company-plugin-mobilecompanylistplugin',
+    'plugins',
+    'This element for show mobiles and companies data',
+    'FILE:EXT:mobile_company/Configuration/FlexForms/MobileList.xml',
 );
 
 ExtensionManagementUtility::addToAllTCAtypes(
@@ -30,28 +33,30 @@ ExtensionManagementUtility::addToAllTCAtypes(
 );
 
 ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
+    '',
     'FILE:EXT:mobile_company/Configuration/FlexForms/MobileList.xml',
     $pluginSignatureList
 );
 
 // --- Mobile Detail Plugin ---
 $pluginSignatureDetail = ExtensionUtility::registerPlugin(
-    $extensionKey,
+    'MobileCompany',
     'Mobilecompanydetailplugin',
     'Mobile Detail Plugin',
-    'LLL:EXT:mobile_company/Resources/Private/Language/locallang_db.xlf: tx_mobile_company_mobilecompanydetailplugin.name'
+    'mobile_company-plugin-mobilecompanydetailplugin',
+    'plugins',
+    'This element for show perticular mobiles and companies data in detail.',
+    'FILE:EXT:mobile_company/Configuration/FlexForms/MobileDetail.xml',
 );
 
 ExtensionManagementUtility::addToAllTCAtypes(
     'tt_content',
-    '--div--;Configuration,pi_flexform',
+    '--div--;Configuration,pi_flexform,',
     $pluginSignatureDetail,
     'after:subheader'
 );
-
 ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
+    '',
     'FILE:EXT:mobile_company/Configuration/FlexForms/MobileDetail.xml',
     $pluginSignatureDetail
 );
